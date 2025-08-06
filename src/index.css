@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: url('assets/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #f1e5c2;
+}
