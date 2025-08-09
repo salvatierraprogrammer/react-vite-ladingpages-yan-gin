@@ -12,8 +12,15 @@ import {
   Divider,
   Container,
 } from '@mui/material';
-
+import video_rell from '../assets/videos/reel_todo_el_uiverso_es_energia.mp4'
 const proyectos = [
+  {
+    titulo: 'Todo el uiverso es energia',
+    videoUrl: video_rell,
+    descripcion: `Fragmento audiovisual de exploración estética y narrativa personal, desarrollado como parte de su formación artística.`,
+    thumbnail: '/assets/thumb2.jpg',
+    duracion: '0:44',
+  },
   {
     titulo: 'Entre el instante y la eternidad',
     videoUrl: 'https://www.youtube.com/embed/4pEcQiZBkgQ',

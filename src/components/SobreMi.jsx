@@ -26,8 +26,20 @@ const SobreMi = () => {
         >
           Sobre Mí
         </Typography>
-
-        <Typography
+      <Typography
+        variant="body1"
+        sx={{
+          fontSize: '1.2rem',
+          lineHeight: 2,
+          textAlign: 'justify',
+          mb: 4,
+        }}
+      >
+        Soy Yan Gian, nombre con el que me conocen en redes, en el ámbito artístico y entre amigos y familia.
+        Es mi nombre artístico, y refleja mi identidad creativa. Mi nombre legal es Yanett Cáncelo, pero uso "Yan Gian" 
+        como sello personal y profesional en el mundo audiovisual.
+      </Typography>
+       <Typography
           variant="body1"
           sx={{
             fontSize: '1.2rem',

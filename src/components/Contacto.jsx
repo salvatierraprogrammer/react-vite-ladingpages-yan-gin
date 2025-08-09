@@ -28,34 +28,30 @@ const Contacto = () => {
     setMensaje('');
   };
 
-  const handleEnviar = () => {
-    if (!nombre.trim() || !mensaje.trim()) {
-      alert('Por favor completa nombre y mensaje');
-      return;
-    }
+const handleEnviar = () => {
+  if (!nombre.trim() || !mensaje.trim()) {
+    alert('Por favor completa nombre y mensaje');
+    return;
+  }
 
-    if (metodo === 'email') {
-      if (!email.trim()) {
-        alert('Por favor completa el email');
-        return;
-      }
-      const subject = encodeURIComponent(`Contacto de ${nombre}`);
-      const body = encodeURIComponent(mensaje);
-      const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
-      window.location.href = mailto;
-    }
+  const miEmail = "tuemail@ejemplo.com";
+  const miWhatsApp = "5491170440397";
 
-    if (metodo === 'whatsapp') {
-      if (!whatsapp.trim()) {
-        alert('Por favor completa el número de WhatsApp');
-        return;
-      }
-      const numeroLimpio = whatsapp.replace(/[^\d+]/g, '');
-      const texto = encodeURIComponent(`Hola ${nombre}, te contacta: ${mensaje}`);
-      const url = `https://wa.me/${numeroLimpio}?text=${texto}`;
-      window.open(url, '_blank');
-    }
-  };
+  if (metodo === 'email') {
+    const subject = encodeURIComponent(`📩 Contacto de ${nombre}`);
+    const body = encodeURIComponent(`👋 Hola,\n\n${mensaje}\n\nSaludos,\n${nombre}`);
+    const mailto = `mailto:${miEmail}?subject=${subject}&body=${body}`;
+    window.location.href = mailto;
+  }
+
+  if (metodo === 'whatsapp') {
+    const texto = encodeURIComponent(`👋 Hola! Soy ${nombre}.\nMi consulta es: ${mensaje} 😊`);
+    const url = `https://api.whatsapp.com/send?phone=${miWhatsApp}&text=${texto}`;
+    window.open(url, '_blank');
+  }
+};
+
+
 
   return (
     <Box

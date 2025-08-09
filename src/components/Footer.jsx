@@ -20,7 +20,7 @@ const Footer = () => {
       <Container maxWidth="md" sx={{ textAlign: 'center' }}>
         <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 2 }}>
           <IconButton
-            href="https://www.instagram.com/"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: '#d4b75c', '&:hover': { color: '#ffe58a' } }}
@@ -29,7 +29,7 @@ const Footer = () => {
           </IconButton>
 
           <IconButton
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/yan-gian-9b0457314/"
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: '#d4b75c', '&:hover': { color: '#ffe58a' } }}
@@ -38,7 +38,7 @@ const Footer = () => {
           </IconButton>
 
           <IconButton
-            href="mailto:contacto@tucorreo.com"
+            href="#"
             sx={{ color: '#d4b75c', '&:hover': { color: '#ffe58a' } }}
           >
             <EmailIcon />
