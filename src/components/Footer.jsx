@@ -81,7 +81,7 @@ const Footer = () => {
           <Container maxWidth="md" sx={{ textAlign: 'center' }}>
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 2 }}>
               <IconButton
-                href="https://www.instagram.com/nett_giano"
+                href="https://www.instagram.com/yangian93/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
