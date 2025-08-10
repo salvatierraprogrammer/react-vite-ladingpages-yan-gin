@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Typography,
@@ -11,8 +11,10 @@ import {
   Avatar,
   Divider,
   Container,
+  Fade,
 } from '@mui/material';
-import video_rell from '../assets/videos/reel_todo_el_uiverso_es_energia.mp4'
+import video_rell from '../assets/videos/reel_todo_el_uiverso_es_energia.mp4';
+
 const proyectos = [
   {
     titulo: 'Todo el uiverso es energia',
@@ -35,11 +37,29 @@ const proyectos = [
     thumbnail: '/assets/thumb2.jpg',
     duracion: '3:09',
   },
-  // Puedes agregar más proyectos aquí
 ];
+
+// Hook para animación al entrar en pantalla
+const useScrollAnimation = () => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, visible];
+};
 
 const Proyectos = () => {
   const [videoSeleccionado, setVideoSeleccionado] = useState(proyectos[0]);
+  const [listaRef, listaVisible] = useScrollAnimation();
+  const [videoRef, videoVisible] = useScrollAnimation();
 
   return (
     <Box
@@ -64,111 +84,121 @@ const Proyectos = () => {
         <Grid container spacing={4}>
           {/* LISTA DE VIDEOS */}
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ color: '#87cefa', mb: 2 }}>
-              Mis proyectos
-            </Typography>
+            <Fade in={listaVisible} timeout={1000}>
+              <Box ref={listaRef}>
+                <Typography variant="h6" sx={{ color: '#87cefa', mb: 2 }}>
+                  Mis proyectos
+                </Typography>
 
-            <List
-              dense
-              sx={{
-                maxHeight: 500,
-                overflowY: 'auto',
-                bgcolor: 'rgba(255,255,255,0.03)',
-                borderRadius: 2,
-                pr: 1,
-              }}
-            >
-              {proyectos.map((proyecto, index) => (
-                <React.Fragment key={index}>
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      selected={videoSeleccionado.videoUrl === proyecto.videoUrl}
-                      onClick={() => setVideoSeleccionado(proyecto)}
-                      sx={{
-                        alignItems: 'flex-start',
-                        gap: 2,
-                        borderRadius: 1,
-                        p: 1.2,
-                        bgcolor:
-                          videoSeleccionado.videoUrl === proyecto.videoUrl
-                            ? 'rgba(212, 183, 92, 0.2)'
-                            : 'transparent',
-                        '&:hover': {
-                          bgcolor: 'rgba(212, 183, 92, 0.1)',
-                        },
-                        transition: 'background-color 0.3s ease',
-                      }}
-                    >
-                      <ListItemAvatar>
-                        <Avatar
-                          variant="rounded"
-                          src={proyecto.thumbnail}
-                          alt={proyecto.titulo}
+                <List
+                  dense
+                  sx={{
+                    maxHeight: 500,
+                    overflowY: 'auto',
+                    bgcolor: 'rgba(255,255,255,0.03)',
+                    borderRadius: 2,
+                    pr: 1,
+                  }}
+                >
+                  {proyectos.map((proyecto, index) => (
+                    <React.Fragment key={index}>
+                      <ListItem disablePadding>
+                        <ListItemButton
+                          selected={videoSeleccionado.videoUrl === proyecto.videoUrl}
+                          onClick={() => setVideoSeleccionado(proyecto)}
                           sx={{
-                            width: 64,
-                            height: 36,
-                            border: '1px solid #d4b75c',
+                            alignItems: 'flex-start',
+                            gap: 2,
+                            borderRadius: 1,
+                            p: 1.2,
+                            bgcolor:
+                              videoSeleccionado.videoUrl === proyecto.videoUrl
+                                ? 'rgba(212, 183, 92, 0.2)'
+                                : 'transparent',
+                            '&:hover': {
+                              bgcolor: 'rgba(212, 183, 92, 0.1)',
+                            },
+                            transition: 'background-color 0.3s ease',
                           }}
-                        />
-                      </ListItemAvatar>
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              variant="rounded"
+                              src={proyecto.thumbnail}
+                              alt={proyecto.titulo}
+                              sx={{
+                                width: 64,
+                                height: 36,
+                                border: '1px solid #d4b75c',
+                              }}
+                            />
+                          </ListItemAvatar>
 
-                      <ListItemText
-                        primary={
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: 'bold', color: '#ffffff' }}
-                          >
-                            {proyecto.titulo}
-                          </Typography>
-                        }
-                        secondary={
-                          <Typography variant="caption" sx={{ color: '#d4b75c' }}>
-                            {proyecto.duracion}
-                          </Typography>
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  <Divider sx={{ backgroundColor: '#333' }} />
-                </React.Fragment>
-              ))}
-            </List>
+                          <ListItemText
+                            primary={
+                              <Typography
+                                variant="body2"
+                                sx={{ fontWeight: 'bold', color: '#ffffff' }}
+                              >
+                                {proyecto.titulo}
+                              </Typography>
+                            }
+                            secondary={
+                              <Typography variant="caption" sx={{ color: '#d4b75c' }}>
+                                {proyecto.duracion}
+                              </Typography>
+                            }
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <Divider sx={{ backgroundColor: '#333' }} />
+                    </React.Fragment>
+                  ))}
+                </List>
+              </Box>
+            </Fade>
           </Grid>
 
           {/* VIDEO SELECCIONADO */}
           <Grid item xs={12} md={8}>
-            <Box
-              sx={{
-                borderRadius: 2,
-                overflow: 'hidden',
-                boxShadow: 4,
-                mb: 3,
-                position: 'relative',
-                pb: '56.25%',
-                border: '1px solid #d4b75c',
-              }}
-            >
-              <iframe
-                src={videoSeleccionado.videoUrl}
-                title={videoSeleccionado.titulo}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-              />
-            </Box>
+            <Fade in={videoVisible} timeout={1200}>
+              <Box ref={videoRef}>
+                <Box
+                  sx={{
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    boxShadow: 4,
+                    mb: 3,
+                    position: 'relative',
+                    pb: '56.25%',
+                    border: '1px solid #d4b75c',
+                  }}
+                >
+                  <iframe
+                    src={videoSeleccionado.videoUrl}
+                    title={videoSeleccionado.titulo}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                </Box>
 
-            <Typography variant="h6" sx={{ color: '#ffe58a', mb: 1 }}>
-              {videoSeleccionado.titulo}
-            </Typography>
-            <Typography variant="body2">{videoSeleccionado.descripcion}</Typography>
+                <Typography variant="h6" sx={{ color: '#ffe58a', mb: 1 }}>
+                  {videoSeleccionado.titulo}
+                </Typography>
+                <Typography variant="body2">
+                  {videoSeleccionado.descripcion}
+                </Typography>
+              </Box>
+            </Fade>
           </Grid>
         </Grid>
       </Container>

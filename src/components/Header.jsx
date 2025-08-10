@@ -75,8 +75,13 @@ const Header = () => {
               color="inherit"
               aria-label="menu"
               onClick={toggleDrawer(true)}
+              sx={{
+                color: '#f1e5c2',
+                transition: 'transform 0.3s ease',
+                transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+              }}
             >
-              <MenuIcon sx={{ color: '#f1e5c2' }} />
+              <MenuIcon />
             </IconButton>
           ) : (
             <Box>
@@ -106,7 +111,12 @@ const Header = () => {
       </AppBar>
 
       {/* Drawer para mobile */}
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={toggleDrawer(false)}
+        transitionDuration={{ enter: 500, exit: 400 }}
+      >
         <Box
           sx={{
             width: 250,
