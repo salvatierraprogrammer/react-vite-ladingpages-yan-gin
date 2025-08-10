@@ -48,7 +48,7 @@ const Contacto = () => {
     setMensaje('');
   };
 
- const handleEnviar = () => {
+const handleEnviar = () => {
   if (!nombre.trim() || !mensaje.trim()) {
     alert('Por favor completa nombre y mensaje');
     return;
@@ -57,26 +57,28 @@ const Contacto = () => {
   const miEmail = "yangian.audiovisual@gmail.com";
   const miWhatsApp = "5491170440397";
 
- if (metodo === 'email') {
-  if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
-    alert('Por favor ingresa un email válido');
-    return;
+  if (metodo === 'email') {
+    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
+      alert('Por favor ingresa un email válido');
+      return;
+    }
+
+    const subject = encodeURIComponent(`📩 Contacto de ${nombre}`);
+    const body = encodeURIComponent(`👋 Hola,\n\n${mensaje}\n\nSaludos,\n${nombre}`);
+
+    // Aquí usamos mailto: para abrir app nativa de correo (funciona mejor en móviles)
+    const mailtoLink = `mailto:${miEmail}?subject=${subject}&body=${body}`;
+
+    window.location.href = mailtoLink;
   }
-  const subject = encodeURIComponent(`📩 Contacto de ${nombre}`);
-  const body = encodeURIComponent(`👋 Hola,\n\n${mensaje}\n\nSaludos,\n${nombre}`);
-
-  // Para abrir Gmail web:
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${miEmail}&su=${subject}&body=${body}`;
-  window.open(gmailUrl, '_blank');
-}
-
 
   if (metodo === 'whatsapp') {
     const texto = encodeURIComponent(`👋 Hola! Soy ${nombre}.\nMi consulta es: ${mensaje} 😊`);
     const url = `https://api.whatsapp.com/send?phone=${miWhatsApp}&text=${texto}`;
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 };
+
 
 
   return (
