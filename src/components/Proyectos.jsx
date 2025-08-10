@@ -19,7 +19,7 @@ const proyectos = [
   {
     titulo: 'Todo el uiverso es energia',
     videoUrl: video_rell,
-    descripcion: `Fragmento audiovisual de exploración estética y narrativa personal, desarrollado como parte de su formación artística.`,
+    descripcion: `Publicidad realizada para un centro holístico. Diseñada para transmitir la esencia del bienestar y la armonía que promovemos.`,
     thumbnail: '/assets/thumb2.jpg',
     duracion: '0:44',
   },
@@ -36,6 +36,13 @@ const proyectos = [
     descripcion: `Fragmento audiovisual de exploración estética y narrativa personal, desarrollado como parte de su formación artística.`,
     thumbnail: '/assets/thumb2.jpg',
     duracion: '3:09',
+  },
+  {
+    titulo: 'EL ÚLTIMO MOVIMIENTO',
+    videoUrl: 'https://www.youtube.com/embed/ROEdLymRx50?si=gMbqR9Tef1OuzNej',
+    descripcion: `Corto universitario para la materia Montaje - UNA. Año 2024`,
+    thumbnail: '/assets/thumb2.jpg',
+    duracion: '3:54',
   },
 ];
 
